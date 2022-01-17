@@ -1,0 +1,24 @@
+package src;
+import Model.Product;
+
+dialect "java"
+rule "Promotion A"
+   when
+        $pr : Product($id : ID == "A", $c : count == 3, $p : price = 50)
+   then
+        $pr.setTotalPrice(130);
+end
+
+rule "Promotion B"
+   when
+        $pr : Product($id : ID == "B", $c : count == 2, $p : price = 30)
+   then
+        $pr.setTotalPrice(45);
+end
+
+rule "Promotion C&D"
+   when
+        $pr : Product($id : ID == "C", $c : count == 1, $p : price = 20) and $pr : Product($id : ID == "D", $c : count == 1, $p : price = 15)
+   then
+        $pr.setTotalPrice(30);
+end
